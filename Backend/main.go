@@ -7,6 +7,7 @@ import (
 	"github.com/mikey427/Backend/internal/config"
 	"github.com/mikey427/Backend/internal/controllers"
 	"github.com/mikey427/Backend/internal/database"
+	"github.com/mikey427/Backend/internal/middleware"
 )
 
 func init() {
@@ -19,5 +20,7 @@ func main() {
 	fmt.Println("Hello")
 	router := gin.Default()
 	router.POST("/signup", controllers.Signup)
+	router.POST("/login", controllers.Login)
+	router.GET("/validate", middleware.RequireAuth, controllers.Validate)
 	router.Run() // listen and serve on 0.0.0.0:8080
 }
