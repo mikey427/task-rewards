@@ -11,9 +11,10 @@ import (
 var DB *gorm.DB
 
 func InitConnection() {
+	var err error
 	dsn := os.Getenv("DB")
-	fmt.Println(dsn)
-	DB, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	fmt.Println("dsn: ", dsn)
+	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	fmt.Println(DB)
 
 	if err != nil {
