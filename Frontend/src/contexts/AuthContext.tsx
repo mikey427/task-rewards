@@ -6,7 +6,6 @@ import {
   ReactNode,
 } from "react";
 
-
 interface User {
   id: string;
   name: string;
@@ -30,7 +29,9 @@ interface AuthProviderProps {
 }
 
 // const AuthContext = createContext<AuthContextType | undefined>(undefined);
-export const AuthContext = createContext<AuthContextType | undefined>(undefined);
+export const AuthContext = createContext<AuthContextType | undefined>(
+  undefined
+);
 
 export const useAuth = (): AuthContextType => {
   const context = useContext(AuthContext);
@@ -41,27 +42,62 @@ export const useAuth = (): AuthContextType => {
   return context;
 };
 
+// export const AuthProvider = ({ children }: AuthProviderProps) => {
+//   const [user, setUser] = useState<User | null>(null);
+//   const [loading, setLoading] = useState<boolean>(true);
+//   const API_BASE_URL = import.meta.env.API_BASE_URL || "http://localhost:3000";
+
+//   useEffect(() => {
+//     checkAuthStatus();
+//     // console.log(AuthContext)
+//   }, []);
+
+// const checkAuthStatus = async (): Promise<void> => {
+//   try {
+//     const response = await fetch(`${API_BASE_URL}/api/validate`, {
+//       credentials: "include", // Sends cookies
+//     });
+
+//     if (response.ok) {
+//       const userData: User = await response.json();
+//       console.log(userData);
+//       setUser(userData);
+//     } else {
+//       setUser(null);
+//     }
+//   } catch (error) {
+//     console.error("Auth check failed: ", error);
+//     setUser(null);
+//   } finally {
+//     setLoading(false);
+//   }
+// };
+
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const API_BASE_URL = import.meta.env.API_BASE_URL || 'http://localhost:3000';
-
+  const API_BASE_URL = import.meta.env.API_BASE_URL || "http://localhost:3000";
   useEffect(() => {
+    console.log("AuthProvider mounted, calling checkAuthStatus");
     checkAuthStatus();
-    // console.log(AuthContext)
   }, []);
 
   const checkAuthStatus = async (): Promise<void> => {
+    console.log("checkAuthStatus called");
+
     try {
       const response = await fetch(`${API_BASE_URL}/api/validate`, {
-        credentials: "include", // Sends cookies
+        credentials: "include",
       });
+
+      console.log("Response status:", response.status, response.ok);
 
       if (response.ok) {
         const userData: User = await response.json();
-        console.log(userData)
+        console.log("Setting user data:", userData);
         setUser(userData);
       } else {
+        console.log("Response not ok, setting user to null");
         setUser(null);
       }
     } catch (error) {
@@ -71,10 +107,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       setLoading(false);
     }
   };
+
   const login = async (
     email: string,
     password: string
   ): Promise<{ success: boolean; error?: string }> => {
+    console.log("Cookies being sent:", document.cookie);
     try {
       const response = await fetch(`${API_BASE_URL}/api/login`, {
         method: "POST",
@@ -87,10 +125,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
       if (response.ok) {
         const userData: User = await response.json();
+        console.log(userData);
         setUser(userData);
+        console.log("successful login");
         return { success: true };
       } else {
         const error = await response.json();
+        console.log("failed login");
         return { success: false, error: error.message };
       }
     } catch (error) {
