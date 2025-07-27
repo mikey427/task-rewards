@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/mikey427/Backend/internal/config"
 	"github.com/mikey427/Backend/internal/controllers"
@@ -19,8 +20,16 @@ func init() {
 func main() {
 	fmt.Println("Hello")
 	router := gin.Default()
-	router.POST("/signup", controllers.Signup)
-	router.POST("/login", controllers.Login)
-	router.GET("/validate", middleware.RequireAuth, controllers.Validate)
+
+	router.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost:5173"}, // Your React dev server
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Content-Type", "Authorization"},
+		AllowCredentials: true,
+	}))
+
+	router.POST("/api/signup", controllers.Signup)
+	router.POST("/api/login", controllers.Login)
+	router.GET("/api/validate", middleware.RequireAuth, controllers.Validate)
 	router.Run() // listen and serve on 0.0.0.0:8080
 }

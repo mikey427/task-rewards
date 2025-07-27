@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"net/http"
 	"os"
 	"time"
@@ -118,16 +119,15 @@ func Login(c *gin.Context) {
 	c.SetSameSite(http.SameSiteLaxMode)
 	c.SetCookie("Authorization", tokenString, 3600*24*30, "", "", false, true) // Prod TODO: Update these for security
 
-	c.JSON(http.StatusOK, gin.H{})
+	c.JSON(http.StatusOK, user)
 
 }
 
 func Validate(c *gin.Context) {
 	user, _ := c.Get("user")
+	fmt.Println(user)
 
 	// user.(models.User).Name
 
-	c.JSON(http.StatusOK, gin.H{
-		"message": user,
-	})
+	c.JSON(http.StatusOK, user)
 }

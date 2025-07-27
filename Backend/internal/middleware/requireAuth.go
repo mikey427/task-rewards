@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"fmt"
 	"net/http"
 	"os"
 	"time"
@@ -27,7 +26,7 @@ func RequireAuth(c *gin.Context) {
 		// hmacSampleSecret is a []byte containing your secret, e.g. []byte("my_secret_key")
 		return []byte(os.Getenv("SECRET")), nil
 	}, jwt.WithValidMethods([]string{jwt.SigningMethodHS256.Alg()}))
-	fmt.Println("token: ", token)
+	// fmt.Println("token: ", token)
 	if err != nil {
 		c.AbortWithStatus(http.StatusUnauthorized)
 		return
