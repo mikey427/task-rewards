@@ -14,7 +14,7 @@ import (
 func init() {
 	config.LoadEnvVariables()
 	database.InitConnection()
-	// database.SyncDatabase()
+	database.SyncDatabase()
 }
 
 func main() {

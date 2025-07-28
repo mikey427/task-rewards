@@ -8,7 +8,7 @@ import (
 )
 
 func SyncDatabase() {
-	err := DB.AutoMigrate(&models.User{})
+	err := DB.AutoMigrate(&models.User{}, &models.Chore{}, &models.ShopItem{})
 	if err != nil {
 		log.Fatalf("Failed to migrate database: %v", err)
 	}

@@ -74,10 +74,12 @@ const items = [
 export function AppSidebar() {
   const { user, logout } = useAuth();
   return (
-    <Sidebar>
+    <Sidebar className="text-[#A3F7B5] font-bold">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>TimeToken</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-[#A3F7B5] font-bold">
+            TimeToken
+          </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
