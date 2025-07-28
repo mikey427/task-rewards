@@ -7,9 +7,9 @@ import {
 } from "react";
 
 interface User {
-  id: string;
-  name: string;
-  email: string;
+  ID: string;
+  Name: string;
+  Email: string;
 }
 
 interface AuthContextType {

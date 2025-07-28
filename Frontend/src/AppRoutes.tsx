@@ -3,6 +3,8 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "./contexts/AuthContext";
 import Login from "./Login";
 import App from "./App";
+import { AppSidebar } from "./components/app-sidebar";
+import { SidebarProvider, SidebarTrigger } from "./components/ui/sidebar";
 
 function AppRoutes() {
   const { user, loading } = useAuth();
@@ -21,7 +23,18 @@ function AppRoutes() {
       {user ? (
         // Authenticated routes
         <>
-          <Route path="/" element={<App />} />
+          <Route
+            path="/"
+            element={
+              <>
+                <SidebarProvider>
+                  <AppSidebar />
+                  <SidebarTrigger />
+                  <App />
+                </SidebarProvider>
+              </>
+            }
+          />
           {/* <Route path="/logout" element={} */}
           {/* <Route path="/dashboard" element={<Dashboard />} /> */}
           <Route path="*" element={<Navigate to="/" replace />} />
