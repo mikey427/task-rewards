@@ -13,3 +13,10 @@ type Chore struct {
 	Description  string
 	RewardAmount int
 }
+
+type CreateChoreRequest struct {
+	UserId       uint
+	Title        string
+	Description  string
+	RewardAmount int
+}

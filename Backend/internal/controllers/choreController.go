@@ -1,11 +1,9 @@
 package controllers
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/gin-gonic/gin/binding"
 	"github.com/mikey427/Backend/internal/database"
 	"github.com/mikey427/Backend/internal/models"
 )
@@ -21,24 +19,62 @@ type body struct {
 
 func CreateChore(c *gin.Context) {
 	var user models.User
-	var newChore models.Chore
+	var newChore models.CreateChoreRequest
 
-	if errUser := c.ShouldBindBodyWith(&user, binding.JSON); errUser == nil {
-		fmt.Println("User binded from body")
-	} else if errNewChore := c.ShouldBindBodyWith(&newChore, binding.JSON); errNewChore == nil {
-		fmt.Println("newChore binded from body")
+	temp, exists := c.Get("user")
+	if !exists {
+		c.JSON(500, gin.H{"error": "Failed to retrieve user from Auth Context on backend"})
+		return
 	}
+	user, ok := temp.(models.User)
+	if !ok {
+		c.JSON(500, gin.H{"error": "Invalid user data in context"})
+		return
+	}
+
+	if err := c.ShouldBindJSON(&newChore); err != nil {
+		c.JSON(400, gin.H{"error": err.Error()})
+		return
+	}
+
+	chore := models.Chore{
+		UserId:       user.ID,
+		Title:        newChore.Title,
+		Description:  newChore.Description,
+		RewardAmount: newChore.RewardAmount,
+	}
+	result := database.DB.Create(&chore)
+
+	if result.Error != nil {
+		c.JSON(500, gin.H{"error": "Failed to create chore"})
+		return
+	}
+
+	c.JSON(201, gin.H{
+		"message": "New chore created successfully",
+		"chore":   chore,
+	})
 
 }
 
 func RetrieveAllChores(c *gin.Context) {
-	var user User
-	if err := c.ShouldBindUri(&user); err != nil {
-		c.JSON(400, gin.H{"message": err.Error()})
+	// var user User
+	// if err := c.ShouldBindUri(&user); err != nil {
+	// 	c.JSON(400, gin.H{"message": err.Error()})
+	// }
+	temp, exists := c.Get("user")
+	if !exists {
+		c.JSON(500, gin.H{"error": "Failed to retrieve user from Auth Context on backend"})
+		return
+	}
+	user, ok := temp.(models.User)
+	if !ok {
+		c.JSON(500, gin.H{"error": "Invalid user data in context"})
+		return
 	}
 
 	var chores []models.Chore
-	if result := database.DB.Where("id= ?", user.ID).Find(&chores); result.Error != nil {
+	if result := database.DB.Where("user_id= ?", user.ID).Find(&chores); result.Error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "Error retrieving chores",
 		})
