@@ -11,3 +11,10 @@ type ShopItem struct {
 	Cost        int
 	// MaxQuantity	int
 }
+
+type CreateShopItemRequest struct {
+	UserId      uint
+	Title       string
+	Description string
+	Cost        int
+}

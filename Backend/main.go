@@ -33,8 +33,8 @@ func main() {
 	router.GET("/api/validate", middleware.RequireAuth, controllers.Validate)
 	router.GET("/api/chores", middleware.RequireAuth, controllers.RetrieveAllChores)
 	router.POST("/api/create-chore", middleware.RequireAuth, controllers.CreateChore)
-	// router.GET("/api/shop", )
-	// router.POST("/api/create-shop-item", )
+	router.GET("/api/shop", middleware.RequireAuth, controllers.RetrieveShop)
+	router.POST("/api/create-shop-item", middleware.RequireAuth, controllers.CreateShopItem)
 
 	router.Run() // listen and serve on 0.0.0.0:8080
 }

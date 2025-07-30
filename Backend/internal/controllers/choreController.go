@@ -23,12 +23,12 @@ func CreateChore(c *gin.Context) {
 
 	temp, exists := c.Get("user")
 	if !exists {
-		c.JSON(500, gin.H{"error": "Failed to retrieve user from Auth Context on backend"})
+		c.JSON(500, gin.H{"error": "Failed to retrieve user from Auth Middleware on backend"})
 		return
 	}
 	user, ok := temp.(models.User)
 	if !ok {
-		c.JSON(500, gin.H{"error": "Invalid user data in context"})
+		c.JSON(500, gin.H{"error": "Invalid user data from middleware"})
 		return
 	}
 
@@ -54,7 +54,6 @@ func CreateChore(c *gin.Context) {
 		"message": "New chore created successfully",
 		"chore":   chore,
 	})
-
 }
 
 func RetrieveAllChores(c *gin.Context) {
@@ -64,12 +63,12 @@ func RetrieveAllChores(c *gin.Context) {
 	// }
 	temp, exists := c.Get("user")
 	if !exists {
-		c.JSON(500, gin.H{"error": "Failed to retrieve user from Auth Context on backend"})
+		c.JSON(500, gin.H{"error": "Failed to retrieve user from Auth middleware on backend"})
 		return
 	}
 	user, ok := temp.(models.User)
 	if !ok {
-		c.JSON(500, gin.H{"error": "Invalid user data in context"})
+		c.JSON(500, gin.H{"error": "Invalid user data from middleware"})
 		return
 	}
 
