@@ -21,7 +21,6 @@ type CreateShopItemRequest struct {
 
 type UpdateShopItemRequest struct {
 	ID          uint
-	UserId      uint
 	Title       string
 	Description string
 	Cost        int
