@@ -18,3 +18,11 @@ type CreateShopItemRequest struct {
 	Description string
 	Cost        int
 }
+
+type UpdateShopItemRequest struct {
+	ID          uint
+	UserId      uint
+	Title       string
+	Description string
+	Cost        int
+}

@@ -35,6 +35,8 @@ func main() {
 	router.POST("/api/create-chore", middleware.RequireAuth, controllers.CreateChore)
 	router.GET("/api/shop", middleware.RequireAuth, controllers.RetrieveShop)
 	router.POST("/api/create-shop-item", middleware.RequireAuth, controllers.CreateShopItem)
+	router.DELETE("/api/delete-shop-item/:ID", middleware.RequireAuth, controllers.DeleteShopItem)
+	router.PUT("/api/update-shop-item", middleware.RequireAuth, controllers.UpdateShopItem)
 
 	router.Run() // listen and serve on 0.0.0.0:8080
 }
