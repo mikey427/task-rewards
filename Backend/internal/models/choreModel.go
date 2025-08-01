@@ -20,3 +20,10 @@ type CreateChoreRequest struct {
 	Description  string
 	RewardAmount int
 }
+
+type UpdateChoreRequest struct {
+	ID           uint
+	Title        string
+	Description  string
+	RewardAmount int
+}

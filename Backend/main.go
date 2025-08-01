@@ -28,11 +28,13 @@ func main() {
 		AllowCredentials: true,
 	}))
 
-	router.POST("/api/signup", controllers.Signup)
-	router.POST("/api/login", controllers.Login)
-	router.GET("/api/validate", middleware.RequireAuth, controllers.Validate)
+	router.POST("/api/auth/signup", controllers.Signup)
+	router.POST("/api/auth/login", controllers.Login)
+	router.GET("/api/auth/validate", middleware.RequireAuth, controllers.Validate)
 	router.GET("/api/chores", middleware.RequireAuth, controllers.RetrieveAllChores)
 	router.POST("/api/create-chore", middleware.RequireAuth, controllers.CreateChore)
+	router.DELETE("/api/delete-chore/:ID", middleware.RequireAuth, controllers.DeleteChore)
+	router.PUT("/api/update-chore", middleware.RequireAuth, controllers.Update)
 	router.GET("/api/shop", middleware.RequireAuth, controllers.RetrieveShop)
 	router.POST("/api/create-shop-item", middleware.RequireAuth, controllers.CreateShopItem)
 	router.DELETE("/api/delete-shop-item/:ID", middleware.RequireAuth, controllers.DeleteShopItem)

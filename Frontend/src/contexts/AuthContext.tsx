@@ -54,7 +54,7 @@ export const useAuth = (): AuthContextType => {
 
 // const checkAuthStatus = async (): Promise<void> => {
 //   try {
-//     const response = await fetch(`${API_BASE_URL}/api/validate`, {
+//     const response = await fetch(`${API_BASE_URL}/api/auth/validate`, {
 //       credentials: "include", // Sends cookies
 //     });
 
@@ -86,7 +86,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     console.log("checkAuthStatus called");
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/validate`, {
+      const response = await fetch(`${API_BASE_URL}/api/auth/validate`, {
         credentials: "include",
       });
 
@@ -114,7 +114,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   ): Promise<{ success: boolean; error?: string }> => {
     console.log("Cookies being sent:", document.cookie);
     try {
-      const response = await fetch(`${API_BASE_URL}/api/login`, {
+      const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -141,7 +141,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const logout = async (): Promise<void> => {
     try {
-      await fetch(`${API_BASE_URL}/api/logout`, {
+      await fetch(`${API_BASE_URL}/api/auth/logout`, {
         method: "POST",
         credentials: "include",
       });

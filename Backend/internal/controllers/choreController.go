@@ -1,11 +1,14 @@
 package controllers
 
 import (
+	"context"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/mikey427/Backend/internal/database"
 	"github.com/mikey427/Backend/internal/models"
+	"github.com/mikey427/Backend/utils"
+	"gorm.io/gorm"
 )
 
 type User struct {
@@ -18,17 +21,11 @@ type body struct {
 }
 
 func CreateChore(c *gin.Context) {
-	var user models.User
 	var newChore models.CreateChoreRequest
 
-	temp, exists := c.Get("user")
-	if !exists {
-		c.JSON(500, gin.H{"error": "Failed to retrieve user from Auth Middleware on backend"})
-		return
-	}
-	user, ok := temp.(models.User)
-	if !ok {
-		c.JSON(500, gin.H{"error": "Invalid user data from middleware"})
+	user, err := utils.GetUserFromContext(c)
+	if err != nil {
+		c.JSON(500, gin.H{"error": "Failed to retrieve user from Auth middleware"})
 		return
 	}
 
@@ -57,18 +54,9 @@ func CreateChore(c *gin.Context) {
 }
 
 func RetrieveAllChores(c *gin.Context) {
-	// var user User
-	// if err := c.ShouldBindUri(&user); err != nil {
-	// 	c.JSON(400, gin.H{"message": err.Error()})
-	// }
-	temp, exists := c.Get("user")
-	if !exists {
-		c.JSON(500, gin.H{"error": "Failed to retrieve user from Auth middleware on backend"})
-		return
-	}
-	user, ok := temp.(models.User)
-	if !ok {
-		c.JSON(500, gin.H{"error": "Invalid user data from middleware"})
+	user, err := utils.GetUserFromContext(c)
+	if err != nil {
+		c.JSON(500, gin.H{"error": "Failed to retrieve user from Auth middleware"})
 		return
 	}
 
@@ -85,4 +73,77 @@ func RetrieveAllChores(c *gin.Context) {
 		"chores": chores,
 	})
 
+}
+
+type Chore struct {
+	ID uint `gorm:"primaryKey"`
+}
+
+func DeleteChore(c *gin.Context) {
+	var chore Chore
+
+	if err := c.ShouldBindUri(&chore); err != nil {
+		c.JSON(200, gin.H{
+			"error": err,
+		})
+		return
+	}
+
+	user, err := utils.GetUserFromContext(c)
+	if err != nil {
+		c.JSON(500, gin.H{"error": "Failed to retrieve user from Auth middleware"})
+		return
+	}
+
+	if result := database.DB.Where("id = ? AND user_id = ?", chore.ID, user.ID).Delete(&chore); result.Error != nil {
+		c.JSON(500, gin.H{
+			"error": "Error deleting from DB",
+		})
+		return
+	}
+
+	c.JSON(200, gin.H{
+		"message": "Record deleted successfully",
+	})
+
+}
+
+func UpdateChore(c *gin.Context) {
+	var updatedChoreBody models.UpdateChoreRequest
+
+	var updatedRecord models.Chore
+
+	if err := c.ShouldBindJSON(&updatedChoreBody); err != nil {
+		c.JSON(400, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	user, err := utils.GetUserFromContext(c)
+	if err != nil {
+		c.JSON(500, gin.H{"error": "Failed to retrieve user from Auth middleware"})
+		return
+	}
+
+	updatedRecord.ID = updatedChoreBody.ID
+	updatedRecord.Title = updatedChoreBody.Title
+	updatedRecord.Description = updatedChoreBody.Description
+	updatedRecord.RewardAmount = updatedChoreBody.RewardAmount
+
+	ctx := context.Background()
+
+	result, err := gorm.G[models.Chore](database.DB).Where("id = ? AND user_id = ?", updatedRecord.ID, user.ID).Updates(ctx, updatedRecord)
+
+	if err != nil {
+		c.JSON(500, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	c.JSON(200, gin.H{
+		"message": "Chore updated successfully",
+		"data":    result,
+	})
 }

@@ -7,22 +7,16 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/mikey427/Backend/internal/database"
 	"github.com/mikey427/Backend/internal/models"
+	"github.com/mikey427/Backend/utils"
 	"gorm.io/gorm"
 )
 
 func CreateShopItem(c *gin.Context) {
-	var user models.User
 	var newShopItemReq models.CreateShopItemRequest
 
-	temp, exists := c.Get("user")
-	if !exists {
-		c.JSON(500, gin.H{"Error": "Failed to retrieve user from Auth middleware"})
-		return
-	}
-
-	user, ok := temp.(models.User)
-	if !ok {
-		c.JSON(500, gin.H{"error": "invalid user data from middleware"})
+	user, err := utils.GetUserFromContext(c)
+	if err != nil {
+		c.JSON(500, gin.H{"error": "Failed to retrieve user from Auth middleware"})
 		return
 	}
 
@@ -52,17 +46,9 @@ func CreateShopItem(c *gin.Context) {
 }
 
 func RetrieveShop(c *gin.Context) {
-	temp, exists := c.Get("user")
-	if !exists {
+	user, err := utils.GetUserFromContext(c)
+	if err != nil {
 		c.JSON(500, gin.H{"error": "Failed to retrieve user from Auth middleware"})
-		return
-	}
-
-	user, ok := temp.(models.User)
-	if !ok {
-		c.JSON(500, gin.H{
-			"error": "Invalid user data from middleware",
-		})
 		return
 	}
 
@@ -94,19 +80,9 @@ func DeleteShopItem(c *gin.Context) {
 		return
 	}
 
-	temp, exists := c.Get("user")
-	if !exists {
-		c.JSON(500, gin.H{
-			"error": "Failed to retrieve user from Auth middleware",
-		})
-		return
-	}
-
-	user, ok := temp.(models.User)
-	if !ok {
-		c.JSON(500, gin.H{
-			"error": "Invalid user data from middleware",
-		})
+	user, err := utils.GetUserFromContext(c)
+	if err != nil {
+		c.JSON(500, gin.H{"error": "Failed to retrieve user from Auth middleware"})
 		return
 	}
 
@@ -133,19 +109,9 @@ func UpdateShopItem(c *gin.Context) {
 		return
 	}
 
-	temp, exists := c.Get("user")
-	if !exists {
-		c.JSON(500, gin.H{
-			"error": "Failed to retrieve user from Auth middleware",
-		})
-		return
-	}
-
-	user, ok := temp.(models.User)
-	if !ok {
-		c.JSON(500, gin.H{
-			"error": "Invalid user data from middleware",
-		})
+	user, err := utils.GetUserFromContext(c)
+	if err != nil {
+		c.JSON(500, gin.H{"error": "Failed to retrieve user from Auth middleware"})
 		return
 	}
 
