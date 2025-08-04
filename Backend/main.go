@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/mikey427/Backend/internal/config"
@@ -18,7 +16,7 @@ func init() {
 }
 
 func main() {
-	fmt.Println("Hello")
+	// fmt.Println("Hello")
 	router := gin.Default()
 
 	router.Use(cors.New(cors.Config{
