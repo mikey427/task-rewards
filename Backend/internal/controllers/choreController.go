@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -33,6 +34,8 @@ func CreateChore(c *gin.Context) {
 		c.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
+
+	fmt.Println(user)
 
 	chore := models.Chore{
 		UserId:       user.ID,

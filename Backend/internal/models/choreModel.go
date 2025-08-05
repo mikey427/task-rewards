@@ -15,7 +15,6 @@ type Chore struct {
 }
 
 type CreateChoreRequest struct {
-	UserId       uint
 	Title        string
 	Description  string
 	RewardAmount int

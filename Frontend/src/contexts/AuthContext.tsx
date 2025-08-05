@@ -10,6 +10,10 @@ interface User {
   ID: string;
   Name: string;
   Email: string;
+  Balance: number;
+  CreatedAt: Date;
+  DeleteAt: Date;
+  UpdatedAt: Date;
 }
 
 interface AuthContextType {

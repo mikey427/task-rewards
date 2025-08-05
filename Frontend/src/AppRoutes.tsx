@@ -5,6 +5,7 @@ import Login from "./Login";
 import App from "./App";
 import { AppSidebar } from "./components/app-sidebar";
 import { SidebarProvider, SidebarTrigger } from "./components/ui/sidebar";
+import Chores from "./Chores";
 
 function AppRoutes() {
   const { user, loading } = useAuth();
@@ -37,6 +38,90 @@ function AppRoutes() {
           />
           {/* <Route path="/logout" element={} */}
           {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+          <Route
+            path="/chores"
+            element={
+              <>
+                <SidebarProvider>
+                  <AppSidebar />
+                  <SidebarTrigger />
+                  <Chores />
+                </SidebarProvider>
+              </>
+            }
+          />
+          <Route
+            path="/shop"
+            element={
+              <>
+                <SidebarProvider>
+                  <AppSidebar />
+                  <SidebarTrigger />
+                  <App />
+                </SidebarProvider>
+              </>
+            }
+          />
+          <Route
+            path="/history"
+            element={
+              <>
+                <SidebarProvider>
+                  <AppSidebar />
+                  <SidebarTrigger />
+                  <App />
+                </SidebarProvider>
+              </>
+            }
+          />
+          <Route
+            path="/parental"
+            element={
+              <>
+                <SidebarProvider>
+                  <AppSidebar />
+                  <SidebarTrigger />
+                  <App />
+                </SidebarProvider>
+              </>
+            }
+          />
+          <Route
+            path="/stats"
+            element={
+              <>
+                <SidebarProvider>
+                  <AppSidebar />
+                  <SidebarTrigger />
+                  <App />
+                </SidebarProvider>
+              </>
+            }
+          />
+          <Route
+            path="/manage-user"
+            element={
+              <>
+                <SidebarProvider>
+                  <AppSidebar />
+                  <SidebarTrigger />
+                  <App />
+                </SidebarProvider>
+              </>
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <>
+                <SidebarProvider>
+                  <AppSidebar />
+                  <SidebarTrigger />
+                  <App />
+                </SidebarProvider>
+              </>
+            }
+          />
           <Route path="*" element={<Navigate to="/" replace />} />
         </>
       ) : (

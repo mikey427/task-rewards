@@ -36,37 +36,37 @@ import { useAuth } from "@/contexts/AuthContext";
 const items = [
   {
     title: "Chores",
-    url: "#",
+    url: "/chores",
     icon: ListChecks,
   },
   {
     title: "Shop",
-    url: "#",
+    url: "/shop",
     icon: Gamepad2,
   },
   {
     title: "History",
-    url: "#",
+    url: "/history",
     icon: History,
   },
   {
     title: "Parental",
-    url: "#",
+    url: "/parental",
     icon: ShieldUser,
   },
   {
     title: "Analytics",
-    url: "#",
+    url: "/stats",
     icon: ChartLine,
   },
   {
     title: "Manage Chores/Shop",
-    url: "#",
+    url: "/manage-user",
     icon: Settings2,
   },
   {
     title: "Account Settings",
-    url: "#",
+    url: "/settings",
     icon: Settings,
   },
 ];
@@ -99,7 +99,7 @@ export function AppSidebar() {
       <SidebarFooter>
         <SidebarMenu>
           <div>
-            <span>Balance: [Placeholder]</span>
+            <span>Balance: {user?.Balance}</span>
           </div>
           <SidebarMenuItem>
             <DropdownMenu>
