@@ -11,11 +11,16 @@ export default function Chores({}: Props) {
   const apiUrl = import.meta.env.VITE_API_BASE_URL;
   const { user } = useAuth();
 
+  async function fetchChoreData(): Promise<void> {}
+
   return (
     <div className="w-screen">
-      <div className="w-max h-full mx-auto mt-30">
-        <NewChoreCard />
-      </div>
+      <section className="flex">
+        <div className="w-max h-full mx-auto mt-30">
+          <NewChoreCard />
+        </div>
+        <div className="flex flex-col"></div>
+      </section>
     </div>
   );
 }
