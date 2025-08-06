@@ -42,9 +42,12 @@ export default function NewChoreCard({}: Props) {
         RewardAmount: Number(reward),
       }),
     });
-    toast.success("Chore has been created.");
-    console.log(response);
-    console.log({ chore, reward });
+
+    if (response.ok) {
+      toast.success("Chore has been created.");
+      console.log(response);
+      console.log({ chore, reward });
+    }
   }
   return (
     <Card>
