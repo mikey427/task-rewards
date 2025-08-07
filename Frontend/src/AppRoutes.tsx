@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "./contexts/AuthContext";
 import Login from "./Login";
 import App from "./App";
-import { AppSidebar } from "./components/app-sidebar";
+import { AppSidebar } from "./components/AppSidebar";
 import { SidebarProvider, SidebarTrigger } from "./components/ui/sidebar";
 import Chores from "./Chores";
 

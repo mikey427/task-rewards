@@ -19,6 +19,7 @@ type Props = {};
 export default function Chores({}: Props) {
   const apiUrl = import.meta.env.VITE_API_BASE_URL;
   const [choreData, setChoreData] = useState<Chore[]>([]);
+
   const { user } = useAuth();
 
   async function fetchChoreData(): Promise<void> {
@@ -41,9 +42,9 @@ export default function Chores({}: Props) {
   }, []);
 
   return (
-    <div className="w-screen">
+    <div className="w-screen h-screen">
       <section className="flex">
-        <div className="flex w-max h-full mx-auto mt-30">
+        <div className="flex w-full h-full mx-auto mt-30">
           <NewChoreCard />
           <ChoreListCard chores={choreData} />
         </div>

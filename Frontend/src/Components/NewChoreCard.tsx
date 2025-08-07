@@ -50,7 +50,7 @@ export default function NewChoreCard({}: Props) {
     }
   }
   return (
-    <Card>
+    <Card className="">
       <CardHeader>
         <CardTitle>Create New Chore</CardTitle>
         {/* <CardDescription>Card Description</CardDescription> */}
