@@ -6,7 +6,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogFooter,
 } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 
 type Props = {
   isOpen: boolean;
@@ -19,7 +21,8 @@ type Props = {
 
 export default function ConfirmationModal({
   isOpen,
-  //   onClose,
+  onClose,
+  onConfirm,
   type,
   title,
   description,
@@ -36,6 +39,10 @@ export default function ConfirmationModal({
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
+        <DialogFooter>
+          <Button onClick={onClose}>Cancel</Button>
+          <Button onClick={onConfirm}>Confirm</Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

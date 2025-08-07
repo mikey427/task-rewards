@@ -1,10 +1,10 @@
 import React from "react";
 import {
   Card,
-  CardAction,
+  //   CardAction,
   CardContent,
-  CardDescription,
-  CardFooter,
+  //   CardDescription,
+  //   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -14,10 +14,11 @@ import { Label } from "@/components/ui/label";
 import { useAuth } from "@/contexts/AuthContext";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
+import type { Chore } from "../lib/utils";
 
-type Props = {};
+type Props = { onChoreAdded: (newChore: Chore) => void };
 
-export default function NewChoreCard({}: Props) {
+export default function NewChoreCard({ onChoreAdded }: Props) {
   const apiUrl = import.meta.env.VITE_API_BASE_URL;
   const { user } = useAuth();
 
@@ -45,8 +46,12 @@ export default function NewChoreCard({}: Props) {
 
     if (response.ok) {
       toast.success("Chore has been created.");
-      console.log(response);
-      console.log({ chore, reward });
+      const data = await response.json();
+      const newChore: Chore = data?.chore;
+      onChoreAdded(newChore);
+    } else {
+      const errorData = await response.json();
+      toast.error(`Failed to create chore: ${errorData.message}`);
     }
   }
   return (

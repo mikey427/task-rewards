@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/card";
 import { CheckLine, Trash } from "lucide-react";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import type { Chore } from "../lib/utils";
 import ConfirmationModal from "./ConfirmationModal";
 
@@ -18,6 +18,58 @@ type Props = {
 };
 
 export default function ChoreListCard({ chores }: Props) {
+  const [choresList, setChoresList] = useState<Chore[]>(chores);
+  const [modalState, setModalState] = useState({
+    isOpen: false,
+    type: "Confirmation" as "Confirmation" | "Warning" | "Error",
+    title: "",
+    description: "",
+    onConfirm: () => {},
+  });
+
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
+  useEffect(() => {
+    setChoresList(chores);
+  }, [chores]);
+
+  const openModal = (config: {
+    type: "Warning" | "Error" | "Confirmation";
+    title: string;
+    description: string;
+    onConfirm: () => void;
+  }) => {
+    setModalState({
+      ...config,
+      isOpen: true,
+    });
+  };
+
+  const handleDelete = (choreId: string) => {
+    openModal({
+      type: "Confirmation",
+      title: "Delete Chore",
+      description: "Are you sure you want to delete this chore?",
+      onConfirm: async () => {
+        const res = await fetch(`${apiUrl}/delete-chore/${choreId}`, {
+          method: "DELETE",
+          credentials: "include",
+        });
+        if (!res.ok) {
+          console.error("Failed to delete chore");
+          return;
+        }
+
+        setChoresList((prevChores) =>
+          prevChores.filter((chore) => chore.ID !== choreId)
+        );
+
+        console.log(`Chore with ID ${choreId} deleted.`);
+        setModalState((prev) => ({ ...prev, isOpen: false }));
+      },
+    });
+  };
+
   return (
     <div className="m-6 w-2/3">
       <Card className="">
@@ -38,10 +90,10 @@ export default function ChoreListCard({ chores }: Props) {
             <label className="text-sm font-medium text-gray-700">Actions</label>
           </div>
           <div className="flex flex-col">
-            {chores.length == 0 ? (
+            {choresList.length == 0 ? (
               <></>
             ) : (
-              chores.map((chore, idx) => {
+              choresList.map((chore, idx) => {
                 return (
                   <div
                     key={idx}
@@ -55,7 +107,10 @@ export default function ChoreListCard({ chores }: Props) {
                       <span>
                         <CheckLine className=" mr-5 h-4 w-4" />
                       </span>
-                      <span>
+                      <span
+                        className="cursor-pointer"
+                        onClick={() => handleDelete(chore.ID)}
+                      >
                         <Trash className="h-4 w-4" />
                       </span>
                     </span>
@@ -70,47 +125,13 @@ export default function ChoreListCard({ chores }: Props) {
         </CardFooter>
       </Card>
       <ConfirmationModal
-        isOpen={false}
-        onClose={() => {}}
-        onConfirm={() => {}}
-        type="Confirmation"
-        title="Confirm Action"
-        description="Are you sure you want to perform this action?"
+        isOpen={modalState.isOpen}
+        onClose={() => setModalState((prev) => ({ ...prev, isOpen: false }))}
+        onConfirm={modalState.onConfirm}
+        type={modalState.type}
+        title={modalState.title}
+        description={modalState.description}
       />
     </div>
   );
 }
-
-// const [modalState, setModalState] = useState({
-//   isOpen: false,
-//   type: "Confirmation" as const,
-//   title: "",
-//   description: "",
-//   onConfirm: () => {},
-// });
-
-// // Function to open modal with custom content
-// const openModal = (config: {
-//   type: "Confirmation" | "Delete" | etc;
-//   title: string;
-//   description: string;
-//   onConfirm: () => void;
-// }) => {
-//   setModalState({
-//     ...config,
-//     isOpen: true,
-//   });
-// };
-
-// // Usage example for delete action
-// const handleDelete = (choreId: string) => {
-//   openModal({
-//     type: "Delete",
-//     title: "Delete Chore",
-//     description: "Are you sure you want to delete this chore?",
-//     onConfirm: () => {
-//       // Delete logic here
-//       setModalState((prev) => ({ ...prev, isOpen: false }));
-//     },
-//   });
-// };

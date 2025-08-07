@@ -34,8 +34,13 @@ export default function Chores({}: Props) {
 
     const data = await response.json();
     setChoreData(data.chores || []);
+    console.log(data.chores);
     console.log("Chore data fetched.");
   }
+
+  const updateChoreData = (newChore: Chore) => {
+    setChoreData((prevChores) => [...prevChores, newChore]);
+  };
 
   useEffect(() => {
     fetchChoreData();
@@ -45,7 +50,7 @@ export default function Chores({}: Props) {
     <div className="w-screen h-screen">
       <section className="flex">
         <div className="flex w-full h-full mx-auto mt-30">
-          <NewChoreCard />
+          <NewChoreCard onChoreAdded={updateChoreData} />
           <ChoreListCard chores={choreData} />
         </div>
       </section>

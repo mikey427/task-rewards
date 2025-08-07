@@ -6,6 +6,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export interface Chore {
+  ID: string;
   UserId: number;
   Title: string;
   Description: string;
