@@ -12,3 +12,11 @@ export interface Chore {
   Description: string;
   RewardAmount: number;
 }
+
+export interface ShopItem {
+  ID: string;
+  UserId: number;
+  Title: string;
+  Description: string;
+  Cost: number;
+}
