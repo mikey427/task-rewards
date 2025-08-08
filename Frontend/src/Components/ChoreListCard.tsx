@@ -12,12 +12,14 @@ import { CheckLine, Trash } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import type { Chore } from "../lib/utils";
 import ConfirmationModal from "./ConfirmationModal";
+import { useAuth } from "../contexts/AuthContext";
 
 type Props = {
   chores: Chore[];
 };
 
 export default function ChoreListCard({ chores }: Props) {
+  const { checkAuthStatus } = useAuth();
   const [choresList, setChoresList] = useState<Chore[]>(chores);
   const [modalState, setModalState] = useState({
     isOpen: false,
@@ -69,14 +71,39 @@ export default function ChoreListCard({ chores }: Props) {
       },
     });
   };
+  const handleCompletion = (choreId: string) => {
+    openModal({
+      type: "Confirmation",
+      title: "Complete Chore",
+      description: "Are you sure you want to complete this chore?",
+      onConfirm: async () => {
+        const res = await fetch(`${apiUrl}/complete-chore/${choreId}`, {
+          method: "POST",
+          credentials: "include",
+        });
+        if (!res.ok) {
+          console.error("Failed to complete chore");
+          return;
+        }
+
+        // setChoresList((prevChores) =>
+        //   prevChores.filter((chore) => chore.ID !== choreId)
+        // );
+
+        await checkAuthStatus();
+        console.log(`Chore with ID ${choreId} completed.`);
+        setModalState((prev) => ({ ...prev, isOpen: false }));
+      },
+    });
+  };
 
   return (
     <div className="m-6 w-2/3">
       <Card className="">
         <CardHeader>
-          <CardTitle>Card Title</CardTitle>
-          <CardDescription>Card Description</CardDescription>
-          <CardAction>Card Action</CardAction>
+          <CardTitle>Chores</CardTitle>
+          <CardDescription>Manage your chores</CardDescription>
+          {/* <CardAction>Card Action</CardAction> */}
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-[2fr_4fr_1fr_1fr] gap-4 items-center">
@@ -104,7 +131,7 @@ export default function ChoreListCard({ chores }: Props) {
                     <span>{String(chore.RewardAmount)}</span>
                     {/* <span className="pr-5"></span> */}
                     <span className="flex pr-5">
-                      <span>
+                      <span onClick={() => handleCompletion(chore.ID)}>
                         <CheckLine className=" mr-5 h-4 w-4" />
                       </span>
                       <span
@@ -120,9 +147,7 @@ export default function ChoreListCard({ chores }: Props) {
             )}
           </div>
         </CardContent>
-        <CardFooter>
-          <p>Card Footer</p>
-        </CardFooter>
+        <CardFooter>{/* <p>Card Footer</p> */}</CardFooter>
       </Card>
       <ConfirmationModal
         isOpen={modalState.isOpen}

@@ -74,9 +74,9 @@ export default function ShopListCard({ shopItems }: Props) {
     <div className="m-6 w-2/3">
       <Card className="">
         <CardHeader>
-          <CardTitle>Card Title</CardTitle>
-          <CardDescription>Card Description</CardDescription>
-          <CardAction>Card Action</CardAction>
+          <CardTitle>Shop Items</CardTitle>
+          <CardDescription>Manage your shop items</CardDescription>
+          {/* <CardAction>Card Action</CardAction> */}
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-[2fr_4fr_1fr_1fr] gap-4 items-center">
@@ -120,9 +120,9 @@ export default function ShopListCard({ shopItems }: Props) {
             )}
           </div>
         </CardContent>
-        <CardFooter>
+        {/* <CardFooter>
           <p>Card Footer</p>
-        </CardFooter>
+        </CardFooter> */}
       </Card>
       <ConfirmationModal
         isOpen={modalState.isOpen}

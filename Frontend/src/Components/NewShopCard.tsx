@@ -78,13 +78,22 @@ export default function NewShopCard({ onShopItemAdded }: Props) {
                 className="w-full"
               />
             </div>
+            <div className="space-y-2">
+              <Label
+                htmlFor="reward"
+                className="text-sm font-medium text-gray-700"
+              >
+                Description of Reward
+              </Label>
+              <Input name="description" id="description" className="w-full" />
+            </div>
 
             <div className="space-y-2">
               <Label
                 htmlFor="cost"
                 className="text-sm font-medium text-gray-700"
               >
-                Cost (minutes)
+                Cost (TimeTokens)
               </Label>
               <Input
                 name="cost"

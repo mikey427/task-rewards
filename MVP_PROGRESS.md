@@ -23,24 +23,35 @@ Build a fully functional core system where a **single user** can:
   
 - [x] **User Dashboard** 🔄 *Partially Complete*
   - [x] Basic structure with sidebar navigation (July 27, 2025)
-  - [ ] View current time balance
+  - [x] View current time balance
   - [ ] View recent chore and spend history
   
-- [x] **Chore System** 🔄 *Backend Complete, Frontend In Progress*
+- [x] **Chore System** ✅ *Completed*
   - [x] Backend API routes (July 29, 2025) - `428ac7c`
   - [x] Database models with RewardAmount field
   - [x] Create/view/edit/delete chores functionality
   - [x] Basic frontend chore creation (August 4, 2025) - `fdcb8e3`
   - [x] UI components for chore display (August 5, 2025) - `3a2545b`
-  - [ ] Mark as completed (frontend integration)
+  - [x] Complete chore functionality with confirmation modal (August 8, 2025)
+  - [x] Delete chore functionality with confirmation modal
+  - [x] Dynamic chore list updates and state management
   
-- [x] **Time Wallet** 🔄 *Database Ready, Logic Pending*
+- [x] **Time Wallet** 🔄 *Backend Complete, Frontend Integration Pending*
   - [x] User Balance field in database model
-  - [x] Transaction models (Purchase, ChoreCompletion) - August 3, 2025
-  - [ ] Add time on chore completion logic
-  - [ ] Spend time manually (button + input)
+  - [x] Transaction models (Purchase, ChoreCompletion) - August 3, 2025 - `8fb094b`
+  - [x] Add time on chore completion logic (backend)
+  - [x] Balance updates in AuthContext on chore completion
+  - [ ] Manual spend time interface (shop redemption)
+  - [ ] Frontend balance display on dashboard
   - [ ] Prevent overspending validation
   
+- [x] **Shop System** 🔄 *Backend Complete, Frontend In Progress*
+  - [x] Backend API routes and models (August 2025)
+  - [x] Shop item creation and management - `904226b`
+  - [x] Frontend shop item display components (August 8, 2025) - `e61cd9c`
+  - [ ] Shop item redemption functionality
+  - [ ] Purchase transaction integration
+
 - [ ] **History Log**
   - [x] Backend models for ChoreCompletion and Purchase tracking
   - [ ] Frontend display of completed chores and time spent
@@ -104,26 +115,28 @@ Build a fully functional core system where a **single user** can:
 
 ## 📊 Current Progress Summary
 
-**MVP Completion:** ~60% (4/6 core features substantially complete)
+**MVP Completion:** ~75% (5/6 core features substantially complete, 1 new feature added)
 
 **Completed:**
 - ✅ Authentication system with JWT + cookies (July 26, 2025)
 - ✅ Backend architecture (Go + Gin + GORM + PostgreSQL)
 - ✅ Frontend setup (React + TypeScript + Vite + Tailwind)
-- ✅ Chore system backend with full CRUD operations (July 29, 2025)
-- ✅ Database models for Users (with Balance), Chores, Transactions
-- ✅ Basic UI framework with shadcn/ui and sidebar navigation
+- ✅ Complete chore system with frontend integration (August 8, 2025)
+- ✅ Shop system backend with item management
+- ✅ Database models for Users, Chores, Shop Items, Transactions
+- ✅ UI framework with shadcn/ui components and sidebar navigation
+- ✅ Confirmation modals and user interaction patterns
 
 **In Progress:**
-- 🔄 Chore frontend integration (basic creation done, completion pending)
-- 🔄 Time wallet logic implementation
-- 🔄 Dashboard balance display
+- 🔄 Shop item redemption and purchase functionality
+- 🔄 Dashboard balance display and time wallet UI
+- 🔄 History log frontend implementation
 
 **Next Up:**
-- Complete chore marking functionality
-- Time wallet transaction logic
-- History log display
-- Dashboard balance integration
+- Shop redemption functionality with time deduction
+- Dashboard balance display integration
+- History log frontend implementation
+- Final MVP polish and testing
 
 **Recent Development Timeline:**
 - July 25-26: Initial setup, authentication implementation
@@ -132,7 +145,32 @@ Build a fully functional core system where a **single user** can:
 - July 30-31: Shop system and route debugging
 - August 1-3: Transaction models and database schema
 - August 4-5: Frontend chore components and UI styling
+- August 6-8: Complete chore frontend integration, shop UI components, confirmation modals
 
 ---
 
-*Last Updated: August 6, 2025*
+*Last Updated: August 8, 2025*
+
+---
+
+## 📝 Update Instructions for Claude
+
+When updating this progress tracker:
+
+1. **Check Recent Commits**: Use `git log --oneline -10` to see latest changes
+2. **Update Feature Status**: Change 🔄 to ✅ when features are complete
+3. **Add Implementation Dates**: Include commit dates and hash references
+4. **Update Progress Percentage**: Recalculate based on completed core features
+5. **Update Timeline**: Add recent development periods to timeline section
+6. **Update Last Updated Date**: Change to current date
+7. **Check Both Frontend and Backend**: Verify implementation in both codebases
+8. **Update Next Up Section**: Remove completed items, add new priorities
+
+**Core MVP Features Checklist:**
+- Authentication ✅
+- User Dashboard (partial)
+- Chore System ✅ 
+- Time Wallet (backend complete)
+- Shop System (backend complete)
+- History Log (models complete)
+- Simple UI ✅

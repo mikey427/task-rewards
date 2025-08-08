@@ -78,13 +78,26 @@ export default function NewChoreCard({ onChoreAdded }: Props) {
                 className="w-full"
               />
             </div>
-
             <div className="space-y-2">
               <Label
                 htmlFor="reward"
                 className="text-sm font-medium text-gray-700"
               >
-                Reward for Completion (minutes)
+                Description of Chore
+              </Label>
+              <Input
+                name="description"
+                id="description"
+                // placeholder="Wash the dishes"
+                className="w-full"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label
+                htmlFor="reward"
+                className="text-sm font-medium text-gray-700"
+              >
+                Reward for Completion (TimeTokens)
               </Label>
               <Input
                 name="reward"
