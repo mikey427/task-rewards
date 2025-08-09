@@ -52,9 +52,10 @@ Build a fully functional core system where a **single user** can:
   - [x] Shop item redemption functionality
   - [x] Purchase transaction integration
 
-- [ ] **History Log**
+- [x] **History Log** ✅ *Completed*
   - [x] Backend models for ChoreCompletion and Purchase tracking
-  - [ ] Frontend display of completed chores and time spent
+  - [x] Backend API route with history controller (August 9, 2025) - `b15e428`
+  - [x] Frontend display of completed chores and time spent (August 9, 2025)
   
 - [x] **Simple UI** 🔄 *In Progress*
   - [x] React + TypeScript + Vite setup (July 26, 2025)
@@ -115,7 +116,7 @@ Build a fully functional core system where a **single user** can:
 
 ## 📊 Current Progress Summary
 
-**MVP Completion:** ~75% (5/6 core features substantially complete, 1 new feature added)
+**MVP Completion:** ~85% (6/6 core features substantially complete)
 
 **Completed:**
 - ✅ Authentication system with JWT + cookies (July 26, 2025)
@@ -126,17 +127,15 @@ Build a fully functional core system where a **single user** can:
 - ✅ Database models for Users, Chores, Shop Items, Transactions
 - ✅ UI framework with shadcn/ui components and sidebar navigation
 - ✅ Confirmation modals and user interaction patterns
+- ✅ History log system with transaction tracking (August 9, 2025)
 
 **In Progress:**
-- 🔄 Shop item redemption and purchase functionality
 - 🔄 Dashboard balance display and time wallet UI
-- 🔄 History log frontend implementation
 
 **Next Up:**
-- Shop redemption functionality with time deduction
 - Dashboard balance display integration
-- History log frontend implementation
 - Final MVP polish and testing
+- Production deployment preparation
 
 **Recent Development Timeline:**
 - July 25-26: Initial setup, authentication implementation
@@ -146,10 +145,11 @@ Build a fully functional core system where a **single user** can:
 - August 1-3: Transaction models and database schema
 - August 4-5: Frontend chore components and UI styling
 - August 6-8: Complete chore frontend integration, shop UI components, confirmation modals
+- August 9: Shop redemption completion, history log implementation
 
 ---
 
-*Last Updated: August 8, 2025*
+*Last Updated: August 9, 2025*
 
 ---
 
@@ -171,6 +171,6 @@ When updating this progress tracker:
 - User Dashboard (partial)
 - Chore System ✅ 
 - Time Wallet (backend complete)
-- Shop System (backend complete)
-- History Log (models complete)
+- Shop System ✅
+- History Log ✅
 - Simple UI ✅
