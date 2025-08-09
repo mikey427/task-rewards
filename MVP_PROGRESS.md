@@ -24,7 +24,7 @@ Build a fully functional core system where a **single user** can:
 - [x] **User Dashboard** 🔄 *Partially Complete*
   - [x] Basic structure with sidebar navigation (July 27, 2025)
   - [x] View current time balance
-  - [ ] View recent chore and spend history
+  - [x] View recent chore and spend history
   
 - [x] **Chore System** ✅ *Completed*
   - [x] Backend API routes (July 29, 2025) - `428ac7c`
@@ -42,7 +42,7 @@ Build a fully functional core system where a **single user** can:
   - [x] Add time on chore completion logic (backend)
   - [x] Balance updates in AuthContext on chore completion
   <!-- - [ ] Manual spend time interface (shop redemption) -->
-  - [ ] Frontend balance display on dashboard
+  - [x] Frontend balance display on dashboard
   - [ ] Prevent overspending validation
   
 - [x] **Shop System** 🔄 *Backend Complete, Frontend In Progress*
@@ -80,34 +80,40 @@ Build a fully functional core system where a **single user** can:
 ## 📈 Future Milestones
 
 ### 🔁 Milestone 2: Recurrence & Scheduling
+
 - [ ] Recurring chores (daily, weekly)
 - [ ] Due dates / calendar view
 - [ ] Reminder notifications (email or in-app)
 
 ### 👪 Milestone 3: Multi-User & Parental Roles
+
 - [ ] Parent/child roles
 - [ ] Family/household grouping
 - [ ] Parent assigns chores to child
 - [ ] Approval for chore completion
 
 ### 📉 Milestone 4: Debt & Penalties
+
 - [ ] Allow negative balance (with limit)
 - [ ] Set overdraft limit per user
 - [ ] Overdraft penalty system
 - [ ] Visual warnings when in debt
 
 ### 🏆 Milestone 5: Gamification
+
 - [ ] Streaks and bonus rewards
 - [ ] Badges / levels
 - [ ] Time multipliers for streaks
 - [ ] Fun avatars or themes purchasable with time
 
 ### 📊 Milestone 6: Analytics & Goals
+
 - [ ] Weekly/monthly activity charts
 - [ ] Custom goal creation
 - [ ] Team goals
 
 ### 🎮 Milestone 7: Fun Time Enforcement
+
 - [ ] Built-in countdown timer for spending time
 - [ ] Lockout when time runs out
 - [ ] Smart device integration (optional)
@@ -119,6 +125,7 @@ Build a fully functional core system where a **single user** can:
 **MVP Completion:** ~85% (6/6 core features substantially complete)
 
 **Completed:**
+
 - ✅ Authentication system with JWT + cookies (July 26, 2025)
 - ✅ Backend architecture (Go + Gin + GORM + PostgreSQL)
 - ✅ Frontend setup (React + TypeScript + Vite + Tailwind)
@@ -130,14 +137,17 @@ Build a fully functional core system where a **single user** can:
 - ✅ History log system with transaction tracking (August 9, 2025)
 
 **In Progress:**
+
 - 🔄 Dashboard balance display and time wallet UI
 
 **Next Up:**
+
 - Dashboard balance display integration
 - Final MVP polish and testing
 - Production deployment preparation
 
 **Recent Development Timeline:**
+
 - July 25-26: Initial setup, authentication implementation
 - July 27: UI framework and sidebar
 - July 28-29: Backend chore system completion  
@@ -167,6 +177,7 @@ When updating this progress tracker:
 8. **Update Next Up Section**: Remove completed items, add new priorities
 
 **Core MVP Features Checklist:**
+
 - Authentication ✅
 - User Dashboard (partial)
 - Chore System ✅ 
