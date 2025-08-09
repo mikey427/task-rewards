@@ -45,5 +45,7 @@ func main() {
 	router.PUT("/api/update-shop-item", middleware.RequireAuth, controllers.UpdateShopItem)
 	router.POST("/api/redeem-shop-item/:ID", middleware.RequireAuth, controllers.RedeemShopItem)
 
+	// Transaction routes
+	router.GET("/api/history", middleware.RequireAuth, controllers.RetrieveHistory)
 	router.Run() // listen and serve on 0.0.0.0:8080
 }

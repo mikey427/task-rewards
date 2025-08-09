@@ -41,7 +41,7 @@ Build a fully functional core system where a **single user** can:
   - [x] Transaction models (Purchase, ChoreCompletion) - August 3, 2025 - `8fb094b`
   - [x] Add time on chore completion logic (backend)
   - [x] Balance updates in AuthContext on chore completion
-  - [ ] Manual spend time interface (shop redemption)
+  <!-- - [ ] Manual spend time interface (shop redemption) -->
   - [ ] Frontend balance display on dashboard
   - [ ] Prevent overspending validation
   
@@ -49,8 +49,8 @@ Build a fully functional core system where a **single user** can:
   - [x] Backend API routes and models (August 2025)
   - [x] Shop item creation and management - `904226b`
   - [x] Frontend shop item display components (August 8, 2025) - `e61cd9c`
-  - [ ] Shop item redemption functionality
-  - [ ] Purchase transaction integration
+  - [x] Shop item redemption functionality
+  - [x] Purchase transaction integration
 
 - [ ] **History Log**
   - [x] Backend models for ChoreCompletion and Purchase tracking

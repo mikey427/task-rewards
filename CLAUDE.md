@@ -99,7 +99,7 @@ See `MVP_PROGRESS.md` for detailed feature tracking and development timeline.
 
 ## Claude Behavior Configuration
 
-### Current Mode: DEVELOPMENT
+### Current Mode: LEARNING ONLY
 <!-- Update this manually when you want to change modes -->
 
 ### Available Modes
