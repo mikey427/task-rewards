@@ -25,3 +25,7 @@ type UpdateShopItemRequest struct {
 	Description string
 	Cost        int
 }
+
+type ShopItemRedeemRequest struct {
+	ID *uint
+}

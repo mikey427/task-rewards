@@ -12,12 +12,14 @@ import { CheckLine, Trash } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import type { ShopItem } from "../lib/utils";
 import ConfirmationModal from "./ConfirmationModal";
+import { useAuth } from "../contexts/AuthContext";
 
 type Props = {
   shopItems: ShopItem[];
 };
 
 export default function ShopListCard({ shopItems }: Props) {
+  const { checkAuthStatus } = useAuth();
   const [shopItemsList, setShopItemsList] = useState<ShopItem[]>(shopItems);
   const [modalState, setModalState] = useState({
     isOpen: false,
@@ -70,6 +72,32 @@ export default function ShopListCard({ shopItems }: Props) {
     });
   };
 
+  const handleRedemption = (shopItemId: string) => {
+    openModal({
+      type: "Confirmation",
+      title: "Redeem Shop Item",
+      description: "Are you sure you want to redeem this shop item?",
+      onConfirm: async () => {
+        const res = await fetch(
+          `${apiUrl}/redeem-shop-item/${Number(shopItemId)}`,
+          {
+            method: "POST",
+            credentials: "include",
+          }
+        );
+        if (!res.ok) {
+          console.error("Failed to redeem shop item");
+          return;
+        }
+
+        // console.log(`Shop item with ID ${shopItemId} redeemed.`);
+        // console.log("Response:", await res.json());
+        await checkAuthStatus();
+        setModalState((prev) => ({ ...prev, isOpen: false }));
+      },
+    });
+  };
+
   return (
     <div className="m-6 w-2/3">
       <Card className="">
@@ -104,7 +132,10 @@ export default function ShopListCard({ shopItems }: Props) {
                     <span>{String(item.Cost)}</span>
                     {/* <span className="pr-5"></span> */}
                     <span className="flex pr-5">
-                      <span>
+                      <span
+                        onClick={() => handleRedemption(item.ID)}
+                        className="cursor-pointer mr-2"
+                      >
                         <CheckLine className=" mr-5 h-4 w-4" />
                       </span>
                       <span
