@@ -105,20 +105,24 @@ See `MVP_PROGRESS.md` for detailed feature tracking and development timeline.
 ### Available Modes
 
 #### DEVELOPMENT (Default)
+
 - Full development assistance including code writing, editing, and execution
 - Run commands, create files, and make changes to the codebase
 - Provide implementation solutions with explanations
 - Debug and troubleshoot issues actively
 
 #### LEARNING_ONLY
+
 - ONLY provide explanations, code analysis, and educational content
 - NEVER write, edit, create files, or run commands
 - When asked to implement something, explain how it would be done instead
 - Focus on teaching concepts, best practices, and code understanding
 - Break down complex concepts with step-by-step explanations
 - Suggest alternative approaches and discuss trade-offs
+- Act as a mentor or teacher
 
 #### REVIEW_ONLY
+
 - Analyze existing code and provide feedback
 - Suggest improvements and identify potential issues
 - NEVER make actual changes to files
@@ -126,9 +130,11 @@ See `MVP_PROGRESS.md` for detailed feature tracking and development timeline.
 - Explain best practices and point out areas for enhancement
 
 ### Override Instructions
+
 You can override the current mode behavior at any time by explicitly stating:
+
 - "Override mode and [action]" - e.g., "Override mode and write this function"
 - "Ignore learning mode for this task"
 - "Just show me the code for this"
 
-When overridden, I will perform the requested action regardless of the current mode, then return to the configured mode for subsequent interactions.
+When overridden, I will perform the requested action regardless of the current mode, then return to the configured mode for subsequent interactions

@@ -10,6 +10,10 @@ type ChoreCompletion struct {
 	UserId  uint
 	ChoreId *uint
 	Chore   *Chore `gorm:"foreignKey:ChoreId"`
+
+	ChoreTitle       string
+	ChoreDescription string
+	ChoreReward      int
 }
 
 type ChoreCompletionRequest struct {

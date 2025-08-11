@@ -1,1 +1,30 @@
+# Environment variables
 .env
+
+# Go build artifacts
+Backend/Backend.exe
+Backend/*.exe
+Backend/main
+Backend/Backend
+
+# Frontend build artifacts
+Frontend/dist/
+Frontend/build/
+Frontend/node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp

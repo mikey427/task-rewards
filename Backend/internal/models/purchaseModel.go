@@ -10,4 +10,8 @@ type Purchase struct {
 	UserId     uint
 	ShopItemId *uint
 	ShopItem   *ShopItem `gorm:"foreignKey:ShopItemId"`
+
+	ShopItemTitle       string
+	ShopItemDescription string
+	ShopItemCost        int
 }

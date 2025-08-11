@@ -164,10 +164,18 @@ func RedeemShopItem(c *gin.Context) {
 		return
 	}
 
+	if shopItemRecord.Cost > user.Balance {
+		c.JSON(400, gin.H{"error": "Insufficient balance"})
+		return
+	}
+
 	transactionRecord := models.Purchase{
-		UserId:     user.ID,
-		ShopItemId: &shopItemRecord.ID,
-		ShopItem:   &shopItemRecord,
+		UserId:              user.ID,
+		ShopItemId:          &shopItemRecord.ID,
+		ShopItem:            &shopItemRecord,
+		ShopItemTitle:       shopItemRecord.Title,
+		ShopItemDescription: shopItemRecord.Description,
+		ShopItemCost:        shopItemRecord.Cost,
 	}
 
 	newShopItemRedemptionRecord := gorm.WithResult()

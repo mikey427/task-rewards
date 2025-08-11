@@ -46,7 +46,7 @@ export default function History({}: Props) {
         <div className="space-y-2">
           {history.map((item: HistoryItem) => (
             <div
-              key={item.id}
+              key={`${item.type}-${item.id}`}
               className="flex justify-between items-center p-3 bg-muted/50 rounded-md border"
             >
               <span className="text-xs text-muted-foreground">

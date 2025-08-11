@@ -180,9 +180,12 @@ func CompleteChore(c *gin.Context) {
 	// Create a new ChoreCompletion record
 
 	choreCompletion := models.ChoreCompletion{
-		UserId:  user.ID,
-		ChoreId: &choreRecord.ID,
-		Chore:   &choreRecord,
+		UserId:           user.ID,
+		ChoreId:          &choreRecord.ID,
+		Chore:            &choreRecord,
+		ChoreTitle:       choreRecord.Title,
+		ChoreDescription: choreRecord.Description,
+		ChoreReward:      choreRecord.RewardAmount,
 	}
 
 	newChoreCompletionRecord := gorm.WithResult()
