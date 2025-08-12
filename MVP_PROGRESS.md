@@ -62,7 +62,7 @@ Build a fully functional core system where a **single user** can:
   - [x] shadcn/ui component library integration
   - [x] Sidebar navigation with logout (July 27, 2025)
   - [x] Basic chore creation cards (August 4-5, 2025)
-  - [ ] Complete dashboard layout with balance display
+  - [x] Complete dashboard layout with balance display
 
 ---
 
