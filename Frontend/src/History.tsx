@@ -1,13 +1,11 @@
 import React, { useEffect } from "react";
 import {
   Card,
-  CardAction,
   CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Clock, DollarSign, CheckCircle, ShoppingBag } from "lucide-react";
 
 type Props = {};
 
@@ -35,39 +33,68 @@ export default function History({}: Props) {
   }, []);
 
   return (
-    <Card className="w-3/4 mx-auto mt-10">
-      <CardHeader>
-        <CardTitle>Transaction History</CardTitle>
-        <CardDescription>Card Description</CardDescription>
-        <CardAction>Card Action</CardAction>
-      </CardHeader>
-      <CardContent>
-        <p>Card Content</p>
-        <div className="space-y-2">
-          {history.map((item: HistoryItem) => (
-            <div
-              key={`${item.type}-${item.id}`}
-              className="flex justify-between items-center p-3 bg-muted/50 rounded-md border"
-            >
-              <span className="text-xs text-muted-foreground">
-                {new Date(item.timestamp).toLocaleString()}
-              </span>
-              <span className="font-medium text-sm">{item.name}</span>
-              <span
-                className={`text-sm font-semibold ${
-                  item.type == "chore" ? "text-green-600" : "text-red-600"
-                }`}
-              >
-                {item.type == "chore" ? "+ " : "- "}
-                {item.amount}
-              </span>
+    <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <Card className="shadow-lg">
+        <CardHeader className="pb-4">
+          <CardTitle className="text-2xl font-bold flex items-center gap-2">
+            <Clock className="h-6 w-6 text-blue-600" />
+            Transaction History
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          {history.length === 0 ? (
+            <div className="text-center py-12">
+              <DollarSign className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+              <p className="text-muted-foreground text-lg">No transactions yet</p>
+              <p className="text-muted-foreground text-sm">Complete chores or make purchases to see your history</p>
             </div>
-          ))}
-        </div>
-      </CardContent>
-      <CardFooter>
-        <p>Card Footer</p>
-      </CardFooter>
-    </Card>
+          ) : (
+            <div className="space-y-3">
+              {history.map((item: HistoryItem) => (
+                <div
+                  key={`${item.type}-${item.id}`}
+                  className="flex items-center justify-between p-4 bg-gradient-to-r from-background to-muted/20 rounded-lg border border-muted hover:shadow-md transition-all duration-200"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className={`p-2 rounded-full ${
+                      item.type === "chore" 
+                        ? "bg-green-100 text-green-600 dark:bg-green-900/20 dark:text-green-400" 
+                        : "bg-red-100 text-red-600 dark:bg-red-900/20 dark:text-red-400"
+                    }`}>
+                      {item.type === "chore" ? (
+                        <CheckCircle className="h-4 w-4" />
+                      ) : (
+                        <ShoppingBag className="h-4 w-4" />
+                      )}
+                    </div>
+                    <div>
+                      <p className="font-medium text-foreground">{item.name}</p>
+                      <p className="text-sm text-muted-foreground flex items-center gap-1">
+                        <Clock className="h-3 w-3" />
+                        {new Date(item.timestamp).toLocaleDateString()} at {new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <span
+                      className={`text-lg font-bold ${
+                        item.type === "chore" 
+                          ? "text-green-600 dark:text-green-400" 
+                          : "text-red-600 dark:text-red-400"
+                      }`}
+                    >
+                      {item.type === "chore" ? "+" : "-"}{item.amount} min
+                    </span>
+                    <p className="text-xs text-muted-foreground capitalize">
+                      {item.type === "chore" ? "Earned" : "Spent"}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </CardContent>
+      </Card>
+    </div>
   );
 }

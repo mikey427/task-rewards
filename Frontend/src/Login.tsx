@@ -11,7 +11,7 @@ export default function Login({}: Props) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const result = await login(email, password);
+    const result = await login(email.toLowerCase(), password);
 
     if (!result.success) {
       setError(result.error || "Login failed");
