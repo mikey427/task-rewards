@@ -47,5 +47,5 @@ func main() {
 
 	// Transaction routes
 	router.GET("/api/history", middleware.RequireAuth, controllers.RetrieveHistory)
-	router.Run() // listen and serve on 0.0.0.0:8080
+	router.Run() // listen and serve on 0.0.0.0:3000
 }

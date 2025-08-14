@@ -2,6 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+My Name is Michael.
+
 ## Development Commands
 
 ### Frontend (React + TypeScript + Vite)
@@ -62,38 +64,7 @@ This is a full-stack web application with authentication using a Go backend and 
 - Frontend uses absolute imports with `@/` alias pointing to `src/`
 - Backend follows Go project structure with internal packages
 - Authentication state is checked on app initialization
-- Currently in development phase with core MVP features ~75% complete
-
-### Current Development Status
-**Last Updated: August 8, 2025**
-
-#### Completed Features ✅
-- **Authentication System**: JWT-based auth with HTTP-only cookies (July 26)
-- **Chore Management**: Full CRUD operations with frontend integration (August 8)
-  - Create, view, edit, delete chores
-  - Complete chores with reward system
-  - Confirmation modals for user actions
-- **Shop System Backend**: Item management and API routes (August 2025)
-- **Time Wallet Backend**: Balance tracking and transaction models (August 3)
-- **UI Framework**: shadcn/ui components with responsive design
-
-#### In Progress 🔄
-- Shop item redemption functionality
-- Dashboard balance display
-- History log frontend implementation
-
-#### Technical Achievements
-- **Backend**: Go + Gin + GORM + PostgreSQL architecture
-- **Frontend**: React 19 + TypeScript + Vite + Tailwind CSS
-- **State Management**: React Context for authentication and user state
-- **Database Models**: Users, Chores, Shop Items, Transactions (ChoreCompletion, Purchase)
-- **API Integration**: Credential-based requests with proper error handling
-
-#### Next Priorities
-1. Complete shop redemption with time deduction
-2. Dashboard balance integration
-3. History log display
-4. Final MVP testing and polish
+- Currently in MVP finalization phase with core features complete
 
 See `MVP_PROGRESS.md` for detailed feature tracking and development timeline.
 

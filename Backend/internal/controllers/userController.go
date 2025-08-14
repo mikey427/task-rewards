@@ -40,8 +40,40 @@ func Signup(c *gin.Context) {
 		return
 	}
 
+	userSettings := models.UserSettings{
+		Theme:                        "light",
+		Language:                     "en",
+		DebtEnabled:                  true,
+		DebtMax:                      0, // 0 == default limit
+		InterestEnabled:              true,
+		InterestPercent:              0, // 0 == default debt interest rate
+		DisplayBankruptcy:            true,
+		DeleteChoresOnCompletion:     false,
+		DeleteShopItemsOnCompletion:  false,
+		LevelingEnabled:              true,
+		LevelDecayEnabled:            false,
+		LevelDecayPerDay:             0,
+		CurrencyName:                 "minutes",
+		BankruptcyEnabled:            true,
+		BankruptcyCooldownDays:       0, // 0 == default
+		ProbationEnabled:             true,
+		ProbationDurationDays:        0, // 0 == default
+		ConfirmBeforePurchase:        true,
+		ConfirmBeforeDebt:            true,
+		ShowCompletionAnimations:     false,
+		StreakNotifications:          false,
+		WeeklyReports:                false,
+		DefaultChoreReward:           30,
+		DefaultShopItemCost:          30,
+		StreakBonusMultiplierEnabled: true,
+		AchievementEnabled:           true,
+		LeaderboardEnabled:           true,
+		AnalyticsEnabled:             false,
+		FamilyEnabled:                false,
+	}
+
 	// Create the user
-	user := models.User{Email: body.Email, Password: string(hash)}
+	user := models.User{Email: body.Email, Password: string(hash), Balance: 0, UserSettings: userSettings}
 
 	result := database.DB.Create(&user)
 
