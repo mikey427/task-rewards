@@ -14,6 +14,37 @@ interface User {
   CreatedAt: Date;
   DeleteAt: Date;
   UpdatedAt: Date;
+  UserSettings: {
+    Theme: string;
+    Language: string;
+    DebtEnabled: boolean;
+    DebtMax: number;
+    InterestEnabled: boolean;
+    InterestPercent: number;
+    DisplayBankruptcy: boolean;
+    DeleteChoresOnCompletion: boolean;
+    DeleteShopItemsOnCompletion: boolean;
+    LevelingEnabled: boolean;
+    LevelDecayEnabled: boolean;
+    LevelDecayPerDay: number;
+    CurrencyName: string;
+    BankruptcyEnabled: boolean;
+    BankruptcyCooldownDays: number;
+    ProbationEnabled: boolean;
+    ProbationDurationDays: number;
+    ConfirmBeforePurchase: boolean;
+    ConfirmBeforeDebt: boolean;
+    ShowCompletionAnimations: boolean;
+    StreakNotifications: boolean;
+    WeeklyReports: boolean;
+    DefaultChoreReward: number;
+    DefaultShopItemCost: number;
+    StreakBonusMultiplierEnabled: boolean;
+    AchievementEnabled: boolean;
+    LeaderboardEnabled: boolean;
+    AnalyticsEnabled: boolean;
+    FamilyEnabled: boolean;
+  };
 }
 
 interface AuthContextType {

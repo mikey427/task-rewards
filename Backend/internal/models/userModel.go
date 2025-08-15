@@ -9,11 +9,10 @@ type User struct {
 	Email        string `gorm:"unique"`
 	Password     string
 	Balance      int
-	UserSettings UserSettings
+	UserSettings UserSettings `gorm:"embedded;"`
 }
 
 type UserSettings struct {
-	UserId                       uint
 	Theme                        string
 	Language                     string
 	DebtEnabled                  bool

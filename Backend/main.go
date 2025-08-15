@@ -38,6 +38,9 @@ func main() {
 	router.PUT("/api/update-chore", middleware.RequireAuth, controllers.UpdateChore)
 	router.POST("/api/complete-chore/:ID", middleware.RequireAuth, controllers.CompleteChore)
 
+	// User Settings
+	router.POST("/api/user/settings", middleware.RequireAuth, controllers.UpdateUserSettings)
+
 	// Shop routes
 	router.GET("/api/shop", middleware.RequireAuth, controllers.RetrieveShop)
 	router.POST("/api/create-shop-item", middleware.RequireAuth, controllers.CreateShopItem)

@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"net/http"
 	"os"
 	"time"
@@ -157,9 +156,92 @@ func Login(c *gin.Context) {
 
 func Validate(c *gin.Context) {
 	user, _ := c.Get("user")
-	fmt.Println(user)
 
-	// user.(models.User).Name
+	c.JSON(http.StatusOK, user)
+}
+
+func UpdateUserSettings(c *gin.Context) {
+	var body struct {
+		Theme                        string
+		Language                     string
+		DebtEnabled                  bool
+		DebtMax                      int
+		InterestEnabled              bool
+		InterestPercent              float64
+		DisplayBankruptcy            bool
+		DeleteChoresOnCompletion     bool
+		DeleteShopItemsOnCompletion  bool
+		LevelingEnabled              bool
+		LevelDecayEnabled            bool
+		LevelDecayPerDay             int
+		CurrencyName                 string
+		BankruptcyEnabled            bool
+		BankruptcyCooldownDays       int
+		ProbationEnabled             bool
+		ProbationDurationDays        int
+		ConfirmBeforePurchase        bool
+		ConfirmBeforeDebt            bool
+		ShowCompletionAnimations     bool
+		StreakNotifications          bool
+		WeeklyReports                bool
+		DefaultChoreReward           int
+		DefaultShopItemCost          int
+		StreakBonusMultiplierEnabled bool
+		AchievementEnabled           bool
+		LeaderboardEnabled           bool
+		AnalyticsEnabled             bool
+		FamilyEnabled                bool
+	}
+
+	if c.Bind(&body) != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "Failed to read body",
+		})
+
+		return
+	}
+
+	// Update user settings
+	user := c.MustGet("user").(models.User)
+	user.UserSettings = models.UserSettings{
+		Theme:                        body.Theme,
+		Language:                     body.Language,
+		DebtEnabled:                  body.DebtEnabled,
+		DebtMax:                      body.DebtMax,
+		InterestEnabled:              body.InterestEnabled,
+		InterestPercent:              body.InterestPercent,
+		DisplayBankruptcy:            body.DisplayBankruptcy,
+		DeleteChoresOnCompletion:     body.DeleteChoresOnCompletion,
+		DeleteShopItemsOnCompletion:  body.DeleteShopItemsOnCompletion,
+		LevelingEnabled:              body.LevelingEnabled,
+		LevelDecayEnabled:            body.LevelDecayEnabled,
+		LevelDecayPerDay:             body.LevelDecayPerDay,
+		CurrencyName:                 body.CurrencyName,
+		BankruptcyEnabled:            body.BankruptcyEnabled,
+		BankruptcyCooldownDays:       body.BankruptcyCooldownDays,
+		ProbationEnabled:             body.ProbationEnabled,
+		ProbationDurationDays:        body.ProbationDurationDays,
+		ConfirmBeforePurchase:        body.ConfirmBeforePurchase,
+		ConfirmBeforeDebt:            body.ConfirmBeforeDebt,
+		ShowCompletionAnimations:     body.ShowCompletionAnimations,
+		StreakNotifications:          body.StreakNotifications,
+		WeeklyReports:                body.WeeklyReports,
+		DefaultChoreReward:           body.DefaultChoreReward,
+		DefaultShopItemCost:          body.DefaultShopItemCost,
+		StreakBonusMultiplierEnabled: body.StreakBonusMultiplierEnabled,
+		AchievementEnabled:           body.AchievementEnabled,
+		LeaderboardEnabled:           body.LeaderboardEnabled,
+		AnalyticsEnabled:             body.AnalyticsEnabled,
+		FamilyEnabled:                body.FamilyEnabled,
+	}
+
+	if result := database.DB.Save(&user); result.Error != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": "Failed to update user settings",
+		})
+
+		return
+	}
 
 	c.JSON(http.StatusOK, user)
 }

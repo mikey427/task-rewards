@@ -8,6 +8,7 @@ import { SidebarProvider, SidebarTrigger } from "./components/ui/sidebar";
 import Chores from "./Chores";
 import Shop from "./Shop";
 import History from "./History";
+import Settings from "./Settings";
 
 function AppRoutes() {
   const { user, loading } = useAuth();
@@ -119,7 +120,7 @@ function AppRoutes() {
                 <SidebarProvider>
                   <AppSidebar />
                   <SidebarTrigger />
-                  <App />
+                  <Settings />
                 </SidebarProvider>
               </>
             }
