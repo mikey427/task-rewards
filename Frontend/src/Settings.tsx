@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Label } from "@/components/ui/label";
 import { Input } from "./components/ui/input";
@@ -83,18 +84,182 @@ export default function Settings({}: Props) {
                   </Label>
                   <Input id="default-chore-reward" placeholder="0" />
                 </div>
+                <div>
+                  <Label htmlFor="default-shop-item-cost">
+                    Default Shop Item Cost
+                  </Label>
+                  <Input id="default-shop-item-cost" placeholder="0" />
+                </div>
+                <div>
+                  <Label htmlFor="confirm-before-purchase">
+                    Confirm Before Purchase
+                  </Label>
+                  <Checkbox
+                    id="confirm-before-purchase"
+                    defaultChecked={user?.UserSettings?.ConfirmBeforePurchase}
+                  />
+                </div>
               </TabsContent>
               <TabsContent value="finance">
-                Change your financial settings here.
+                <div>
+                  <Label htmlFor="debt-enabled">Enable Debt</Label>
+                  <Checkbox
+                    id="debt-enabled"
+                    defaultChecked={user?.UserSettings?.DebtEnabled}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="max-debt">Max Debt</Label>
+                  <Input id="max-debt" placeholder="0" />
+                </div>
+                <div>
+                  <Label htmlFor="interest-enabled">Enable Interest</Label>
+                  <Checkbox
+                    id="interest-enabled"
+                    defaultChecked={user?.UserSettings?.InterestEnabled}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="interest-percent">Interest Rate</Label>
+                  <Input id="interest-percent" placeholder="0" />
+                </div>
+                <div>
+                  <Label htmlFor="display-bankruptcy">Display Bankruptcy</Label>
+                  <Checkbox
+                    id="display-bankruptcy"
+                    defaultChecked={user?.UserSettings?.DisplayBankruptcy}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="bankruptcy-cooldown-days">
+                    Bankruptcy Cooldown (Days)
+                  </Label>
+                  <Input id="bankruptcy-cooldown-days" placeholder="0" />
+                </div>
+                <div>
+                  <Label htmlFor="probation-enabled">Enable Probation</Label>
+                  <Checkbox
+                    id="probation-enabled"
+                    defaultChecked={user?.UserSettings?.ProbationEnabled}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="probation-duration-days">
+                    Probation Duration (Days)
+                  </Label>
+                  <Input id="probation-duration-days" placeholder="0" />
+                </div>
+                <div>
+                  <Label htmlFor="confirm-before-debt">
+                    Confirm Before Debt
+                  </Label>
+                  <Checkbox
+                    id="confirm-before-debt"
+                    defaultChecked={user?.UserSettings?.ConfirmBeforeDebt}
+                  />
+                </div>
               </TabsContent>
               <TabsContent value="gamification">
-                Change your gamification settings here.
+                <div>
+                  <Label htmlFor="leveling-enabled">Enable Leveling</Label>
+                  <Checkbox
+                    id="leveling-enabled"
+                    defaultChecked={user?.UserSettings?.LevelingEnabled}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="level-decay-enabled">
+                    Enable Level Decay
+                  </Label>
+                  <Checkbox
+                    id="level-decay-enabled"
+                    defaultChecked={user?.UserSettings?.LevelDecayEnabled}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="level-decay-per-day">
+                    Level Decay (Per Day)
+                  </Label>
+                  <Input id="level-decay-per-day" placeholder="0" />
+                </div>
+                <div>
+                  <Label htmlFor="streak-bonus-multiplier-enabled">
+                    Enable Streak Bonus Multiplier
+                  </Label>
+                  <Checkbox
+                    id="streak-bonus-multiplier-enabled"
+                    defaultChecked={
+                      user?.UserSettings?.StreakBonusMultiplierEnabled
+                    }
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="achievements-enabled">
+                    Enable Achievements
+                  </Label>
+                  <Checkbox
+                    id="achievements-enabled"
+                    defaultChecked={user?.UserSettings?.AchievementEnabled}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="leaderboard-enabled">
+                    Enable Leaderboard
+                  </Label>
+                  <Checkbox
+                    id="leaderboard-enabled"
+                    defaultChecked={user?.UserSettings?.LeaderboardEnabled}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="show-completion-animations">
+                    Show Completion Animations
+                  </Label>
+                  <Checkbox
+                    id="show-completion-animations"
+                    defaultChecked={
+                      user?.UserSettings?.ShowCompletionAnimations
+                    }
+                  />
+                </div>
               </TabsContent>
               <TabsContent value="notifications">
-                Change your notification settings here.
+                <div>
+                  <Label htmlFor="streak-notifications-enabled">
+                    Streak Notifications
+                  </Label>
+                  <Checkbox
+                    id="streak-notifications-enabled"
+                    defaultChecked={
+                      user?.UserSettings?.StreakBonusMultiplierEnabled
+                    }
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="weekly-reports-enabled">
+                    Enable Weekly Reports
+                  </Label>
+                  <Checkbox
+                    id="weekly-reports-enabled"
+                    defaultChecked={user?.UserSettings?.WeeklyReports}
+                  />
+                </div>
               </TabsContent>
               <TabsContent value="advanced">
-                Change your advanced settings here.
+                <div>
+                  <Label htmlFor="analytics-enabled">Enable Analytics</Label>
+                  <Checkbox
+                    id="analytics-enabled"
+                    defaultChecked={user?.UserSettings?.AnalyticsEnabled}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="enable-family">Enable Family Mode</Label>
+                  <Checkbox
+                    id="enable-family"
+                    defaultChecked={user?.UserSettings?.FamilyEnabled}
+                  />
+                </div>
               </TabsContent>
             </Tabs>
           </div>
