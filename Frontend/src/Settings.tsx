@@ -27,6 +27,21 @@ type Props = {};
 export default function Settings({}: Props) {
   const { user, loading } = useAuth();
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  async function handleSubmit(
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData);
+
+    console.log(data);
+  }
+
   return (
     <div className="w-3/4">
       Settings
@@ -266,6 +281,7 @@ export default function Settings({}: Props) {
         </CardContent>
         <CardFooter>
           <p>Card Footer</p>
+          <button onClick={handleSubmit}>Save Changes</button>
         </CardFooter>
       </Card>
     </div>
